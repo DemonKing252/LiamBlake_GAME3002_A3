@@ -17,12 +17,11 @@ public class ThirdPersonCharacter : MonoBehaviour
     {
         // Is there a Surface underneath that we can jump on?
 
-        bool collision = Physics.Linecast(transform.position + Vector3.up * 0.5f, transform.position - Vector3.up * 0.1f);
+        bool collision = Physics.Linecast(transform.position + Vector3.up * 0.5f, transform.position - Vector3.up * 0.02f);
         
         if (collision && Input.GetKey(KeyCode.Space))
         {
             GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x, jumpPower, 0f);
-            collision = false;
         }
 
 
@@ -35,19 +34,19 @@ public class ThirdPersonCharacter : MonoBehaviour
         Vector3 vel = GetComponent<Rigidbody>().velocity;
         vel.y = 0f;
 
-        if (vel.magnitude != 0f)
+        if (collision)
         {
             GetComponent<Animator>().SetInteger("State", 1);
         }
         else
         {
-            GetComponent<Animator>().SetInteger("State", 0);
-        } 
+            GetComponent<Animator>().SetInteger("State", 2);
+        }
         if (horiz > 0f)
         {
             transform.localEulerAngles = new Vector3(0f, 90f, 0f);
         }
-        else
+        else if (horiz < 0f)
         {
             transform.localEulerAngles = new Vector3(0f, 270f, 0f);
         }
@@ -55,7 +54,6 @@ public class ThirdPersonCharacter : MonoBehaviour
         var anim_speed = Mathf.Abs(vel.x) / speed;
 
         GetComponent<Animator>().SetFloat("Speed", anim_speed);
-        GetComponent<Animator>().speed = anim_speed;
         
     }
     private void OnDrawGizmos()
