@@ -10,14 +10,16 @@ public class ThirdPersonCharacter : MonoBehaviour
     [SerializeField]
     private float jumpPower;
 
+    [SerializeField]
+    private float dist;
+
 
     // Update is called once per frame
     [System.Obsolete]
     void FixedUpdate()
     {
         // Is there a Surface underneath that we can jump on?
-
-        bool collision = Physics.Linecast(transform.position + Vector3.up * 0.5f, transform.position - Vector3.up * 0.02f);
+        bool collision = Physics.Linecast(transform.position + Vector3.up * 0.5f, transform.position - Vector3.up * 0.15f);
         
         if (collision && Input.GetKey(KeyCode.Space))
         {
@@ -26,9 +28,19 @@ public class ThirdPersonCharacter : MonoBehaviour
 
 
         float horiz = Input.GetAxis("Horizontal");
-        GetComponent<Rigidbody>().velocity = new Vector3(horiz * speed, GetComponent<Rigidbody>().velocity.y, GetComponent<Rigidbody>().velocity.z);
-        //GetComponent<Rigidbody>().velocity = Vector3.ClampMagnitude(GetComponent<Rigidbody>().velocity, maxSpeed);
 
+        RaycastHit cast;
+        Vector3 potentialVel = new Vector3(horiz * speed, GetComponent<Rigidbody>().velocity.y, GetComponent<Rigidbody>().velocity.z);
+
+        // Check if theres an object in front of our current direction, don't allow the player
+        // to walk into a wall to save them from falling 
+        bool sweepTest = GetComponent<Rigidbody>().SweepTest(potentialVel, out cast, dist);
+        print(sweepTest.ToString());
+
+        if (!sweepTest || collision)
+        {
+            GetComponent<Rigidbody>().velocity = potentialVel;
+        }
 
         // Animations
         Vector3 vel = GetComponent<Rigidbody>().velocity;
