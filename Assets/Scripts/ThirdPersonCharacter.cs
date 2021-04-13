@@ -13,15 +13,46 @@ public class ThirdPersonCharacter : MonoBehaviour
     [SerializeField]
     private float dist;
 
+    private bool m_collision = false;
+
+    [SerializeField]
+    private LayerMask groundMask;
+
+    private bool sweepTest = false;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            // Check if theres an object in front of our current direction, don't allow the player
+            // to walk into a wall to save them from falling 
+            print("YESSSS");
+            sweepTest = true;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            // Check if theres an object in front of our current direction, don't allow the player
+            // to walk into a wall to save them from falling 
+            sweepTest = false;
+        }
+    }
 
     // Update is called once per frame
     [System.Obsolete]
     void FixedUpdate()
     {
-        // Is there a Surface underneath that we can jump on?
-        bool collision = Physics.Linecast(transform.position + Vector3.up * 0.5f, transform.position - Vector3.up * 0.15f);
+        // I choose to use sphere casting over line casting because if the player center is partly off the edge of a ground, the cast will return NULL.
+        // Sphere casting matches the player model the best
+
+        RaycastHit info;
+        Vector3 origin = transform.position + Vector3.up * (transform.localScale.y * 1.5f);
+
+        m_collision = Physics.SphereCast(origin, transform.localScale.x * 0.3f, Vector3.down, out info, 1.51f);
         
-        if (collision && Input.GetKey(KeyCode.Space))
+        if (m_collision && Input.GetKey(KeyCode.Space))
         {
             GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x, jumpPower, 0f);
         }
@@ -32,13 +63,10 @@ public class ThirdPersonCharacter : MonoBehaviour
         RaycastHit cast;
         Vector3 potentialVel = new Vector3(horiz * speed, GetComponent<Rigidbody>().velocity.y, GetComponent<Rigidbody>().velocity.z);
 
-        // Check if theres an object in front of our current direction, don't allow the player
-        // to walk into a wall to save them from falling 
-        bool sweepTest = GetComponent<Rigidbody>().SweepTest(potentialVel, out cast, dist);
-        print(sweepTest.ToString());
-
-        if (!sweepTest || collision)
+        // Sweep test to prevent the player from charging into a wall and not falling, preventing him from falling (remove the !sweeptest and test to find out why this is important)
+        if (!sweepTest)
         {
+            //GetComponent<Rigidbody>().AddForce(potentialVel, ForceMode.Impulse);
             GetComponent<Rigidbody>().velocity = potentialVel;
         }
 
@@ -46,7 +74,7 @@ public class ThirdPersonCharacter : MonoBehaviour
         Vector3 vel = GetComponent<Rigidbody>().velocity;
         vel.y = 0f;
 
-        if (collision)
+        if (m_collision)
         {
             GetComponent<Animator>().SetInteger("State", 1);
         }
@@ -71,6 +99,10 @@ public class ThirdPersonCharacter : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position - Vector3.up * 0.25f);
+        Vector3 origin = transform.position + Vector3.up * (transform.localScale.y * 1.5f);
+        Gizmos.DrawLine(origin, origin - Vector3.up * 1.51f);
+
+
+
     }
 }
