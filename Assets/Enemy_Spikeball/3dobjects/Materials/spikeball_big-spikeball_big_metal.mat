@@ -78,7 +78,7 @@ Material:
     - _Surface: 0
     - _ZWrite: 1
     m_Colors:
-    - Color_d58639ac1440487490264b94415b9079: {r: 1, g: 1, b: 1, a: 1}
+    - Color_d58639ac1440487490264b94415b9079: {r: 1, g: 0, b: 1, a: 1}
     - Color_f6fd3c93ac304ce8b7ab087b12c46b17: {r: 0, g: 1, b: 0, a: 1}
     - Vector2_3526eef5feb647af9e75dc7f1c6ebe8f: {r: 53.19, g: 7.3, b: 0, a: 0}
     - _BaseColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
