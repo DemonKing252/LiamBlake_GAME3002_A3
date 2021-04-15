@@ -8,18 +8,21 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: spikeball_big-spikeball_big_metal
-  m_Shader: {fileID: 4800000, guid: 8d2bb70cbf9db8d4da26e15b26e74248, type: 3}
-  m_ShaderKeywords: _GLOSSINESS_FROM_BASE_ALPHA _SPECULAR_COLOR
+  m_Shader: {fileID: -6465566751694194690, guid: b9f539fbd128ba34281dd61a3ac7ec78, type: 3}
+  m_ShaderKeywords: _SPECULAR_COLOR
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
-  stringTagMap:
-    RenderType: Opaque
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_f1beec8b15a04525a5f615f9a2ec4a15:
+        m_Texture: {fileID: 2800000, guid: c234b87a0cb37bb488d3cc91763d41b8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: fa2958c4ef3dc4b40b18c2ddc4e1e2e0, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -75,11 +78,14 @@ Material:
     - _Surface: 0
     - _ZWrite: 1
     m_Colors:
+    - Color_d58639ac1440487490264b94415b9079: {r: 1, g: 1, b: 1, a: 1}
+    - Color_f6fd3c93ac304ce8b7ab087b12c46b17: {r: 0, g: 1, b: 0, a: 1}
+    - Vector2_3526eef5feb647af9e75dc7f1c6ebe8f: {r: 53.19, g: 7.3, b: 0, a: 0}
     - _BaseColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _ReflectColor: {r: 0.35074627, g: 0.35074627, b: 0.35074627, a: 0.5019608}
-    - _SpecColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _SpecColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.09680425}
   m_BuildTextureStacks: []
 --- !u!1002 &2100001
 EditorExtensionImpl:

@@ -18,6 +18,8 @@ public class ThirdPersonCharacter : MonoBehaviour
     [SerializeField]
     private LayerMask groundMask;
 
+    private bool isAlive = true;
+
     private bool sweepTest = false;
 
     private void OnTriggerEnter(Collider other)
@@ -44,6 +46,8 @@ public class ThirdPersonCharacter : MonoBehaviour
     [System.Obsolete]
     void FixedUpdate()
     {
+        if (!isAlive)
+            return;
         // I choose to use sphere casting over line casting because if the player center is partly off the edge of a ground, the cast will return NULL.
         // Sphere casting matches the player model the best
 
@@ -104,5 +108,10 @@ public class ThirdPersonCharacter : MonoBehaviour
 
 
 
+    }
+    public void OnPlayerDeath()
+    {
+        isAlive = false;
+        GetComponent<Animator>().SetInteger("State", 3);
     }
 }

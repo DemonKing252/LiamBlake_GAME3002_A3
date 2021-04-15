@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class DoorScript : MonoBehaviour
 {
-    private bool playerColliding = false;
+    [SerializeField]
+    GameObject keyNeeded;
+
+
+    [SerializeField]
+    private string keyNeeded_Str;
 
     private JointSpring jspring;
 
@@ -14,8 +19,13 @@ public class DoorScript : MonoBehaviour
     [SerializeField]
     private float closedPosition;
 
+    private bool playerColliding = false;
+
     private void Start()
     {
+        if (keyNeeded != null)
+            keyNeeded_Str = keyNeeded.name;
+
         jspring = GetComponent<HingeJoint>().spring;
     }
     private void OnTriggerEnter(Collider other)
@@ -23,8 +33,15 @@ public class DoorScript : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             // Only if the key is aquired, open door
-            if (FindObjectOfType<GameManager>().KeyAquired)
+            if (FindObjectOfType<GameManager>().activeKey == keyNeeded_Str)
+            {
                 playerColliding = true;
+            }
+            else 
+            {
+                print("Wrong key!");
+                FindObjectOfType<GameManager>().AddMessage("Wrong Key!", 5f);
+            }
         }
     }
     private void OnTriggerExit(Collider other)
@@ -36,8 +53,6 @@ public class DoorScript : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Quaternion.LookRotation(transform.position, transform.position);
-
         if (playerColliding)
             print("Press E to open door");
 

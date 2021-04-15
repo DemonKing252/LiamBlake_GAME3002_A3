@@ -28,7 +28,7 @@ public class SpikeHazard : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, playerTransform.position) <= detectionRadius)
         {
-            transform.FindChild("Mesh").GetComponent<Rigidbody>().AddTorque(Vector3.up * forceApplied * Time.deltaTime, ForceMode.Impulse);
+            transform.Find("Mesh").GetComponent<Rigidbody>().AddTorque(Vector3.up * forceApplied * Time.deltaTime, ForceMode.Impulse);
         }
 
     }
