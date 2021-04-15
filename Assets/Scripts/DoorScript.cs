@@ -36,6 +36,8 @@ public class DoorScript : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        Quaternion.LookRotation(transform.position, transform.position);
+
         if (playerColliding)
             print("Press E to open door");
 
