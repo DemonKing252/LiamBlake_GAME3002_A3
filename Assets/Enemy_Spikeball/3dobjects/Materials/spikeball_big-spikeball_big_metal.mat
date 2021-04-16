@@ -10,7 +10,7 @@ Material:
   m_Name: spikeball_big-spikeball_big_metal
   m_Shader: {fileID: -6465566751694194690, guid: b9f539fbd128ba34281dd61a3ac7ec78, type: 3}
   m_ShaderKeywords: _SPECULAR_COLOR
-  m_LightmapFlags: 4
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_f1beec8b15a04525a5f615f9a2ec4a15:
-        m_Texture: {fileID: 2800000, guid: c234b87a0cb37bb488d3cc91763d41b8, type: 3}
+        m_Texture: {fileID: 2800000, guid: f0d247c24862d4e429c6b47dd9372452, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -60,6 +60,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_9e709720308343dfbd0c4e76fbc64344: 2
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -78,9 +79,9 @@ Material:
     - _Surface: 0
     - _ZWrite: 1
     m_Colors:
-    - Color_d58639ac1440487490264b94415b9079: {r: 1, g: 0, b: 1, a: 1}
+    - Color_d58639ac1440487490264b94415b9079: {r: 1, g: 1, b: 0, a: 1}
     - Color_f6fd3c93ac304ce8b7ab087b12c46b17: {r: 0, g: 1, b: 0, a: 1}
-    - Vector2_3526eef5feb647af9e75dc7f1c6ebe8f: {r: 53.19, g: 7.3, b: 0, a: 0}
+    - Vector2_3526eef5feb647af9e75dc7f1c6ebe8f: {r: 10.77, g: 2.9, b: 0, a: 0}
     - _BaseColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: KeyShader
+  m_Name: KeyMaterial
   m_Shader: {fileID: -6465566751694194690, guid: b9f539fbd128ba34281dd61a3ac7ec78, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -40,11 +40,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_9e709720308343dfbd0c4e76fbc64344: 1
     - Vector1_cafd0d3d613c472b95b6a66cff800077: 1.15
     m_Colors:
-    - Color_d58639ac1440487490264b94415b9079: {r: 0, g: 1, b: 1, a: 1}
+    - Color_d58639ac1440487490264b94415b9079: {r: 0, g: 1, b: 0, a: 1}
     - Color_e95225f206f2435b80ebb6af41543e85: {r: 0, g: 0, b: 0, a: 1}
-    - Color_f6fd3c93ac304ce8b7ab087b12c46b17: {r: 0, g: 1, b: 1, a: 0.36078432}
+    - Color_f6fd3c93ac304ce8b7ab087b12c46b17: {r: 0, g: 1, b: 1, a: 0.6666667}
     - Vector2_3526eef5feb647af9e75dc7f1c6ebe8f: {r: 28, g: 6.04, b: 0, a: 1}
     - Vector4_db5cf5ef626b4d5c9578e2e80c9fb49b: {r: 0, g: 0, b: 0, a: 12.91}
   m_BuildTextureStacks: []
