@@ -30,19 +30,28 @@ public class DoorScript : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        // Can't open the door from the left side!
+        if (other.gameObject.transform.position.x < this.transform.position.x)
         {
-            // Only if the key is aquired, open door
-            if (FindObjectOfType<GameManager>().activeKey == keyNeeded_Str)
+            if (other.gameObject.CompareTag("Player"))
             {
-                playerColliding = true;
-            }
-            else 
-            {
-                print("Wrong key!");
-                FindObjectOfType<GameManager>().AddMessage("Wrong Key!", 5f);
+                // Only if the key is aquired, open door
+                if (FindObjectOfType<GameManager>().activeKey == keyNeeded_Str)
+                {
+                    playerColliding = true;
+                }
+                else if (FindObjectOfType<GameManager>().activeKey == "")
+                {
+                    FindObjectOfType<GameManager>().AddMessage("Missing Key!", 5f);
+                }
+                else if (FindObjectOfType<GameManager>().activeKey != keyNeeded_Str)
+                {
+                    FindObjectOfType<GameManager>().AddMessage("Wrong Key!", 5f);
+                }
             }
         }
+
+        
     }
     private void OnTriggerExit(Collider other)
     {
@@ -51,14 +60,18 @@ public class DoorScript : MonoBehaviour
             playerColliding = false;
         }
     }
-    private void FixedUpdate()
+    private void Update()
     {
         if (playerColliding)
-            print("Press E to open door");
+        {
 
+            FindObjectOfType<GameManager>().AddMessage("Press [E] to open door", Time.deltaTime);
+        }
+        
         // player colliding doesn't get set if the key isn't aquired
         if (Input.GetKey(KeyCode.E) && playerColliding)
         {
+            FindObjectOfType<GameManager>().AddMessage("Door Opened!", 5f);
             OpenDoor();
         }
     }

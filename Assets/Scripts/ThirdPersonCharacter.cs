@@ -22,14 +22,26 @@ public class ThirdPersonCharacter : MonoBehaviour
 
     private bool sweepTest = false;
 
+    [SerializeField]
+    private GameObject[] zones;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Ground"))
         {
             // Check if theres an object in front of our current direction, don't allow the player
             // to walk into a wall to save them from falling 
-            print("YESSSS");
             sweepTest = true;
+        }
+        else
+        {
+            foreach(GameObject zone in zones)
+            {
+                if (other.gameObject.CompareTag(zone.tag))
+                {
+                    FindObjectOfType<GameManager>().SetZoneText(zone.gameObject.name);
+                }
+            }
         }
     }
     private void OnTriggerExit(Collider other)

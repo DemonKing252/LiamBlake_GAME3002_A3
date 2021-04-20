@@ -7,6 +7,8 @@ TagManager:
   - enemy
   - Star
   - Ground
+  - Tutorial
+  - Level1
   layers:
   - Default
   - TransparentFX

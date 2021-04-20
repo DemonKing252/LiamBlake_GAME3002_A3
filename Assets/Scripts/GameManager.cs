@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Text userMsg;
 
+    [SerializeField]
+    private Text zoneText;
+
     // Works, because you can't go to the next room until you get the previous key
 
     private float time = 0f;
@@ -29,6 +32,7 @@ public class GameManager : MonoBehaviour
     {
         time = timeToStart;
     }
+    private bool passedZone = false;
 
     [System.Obsolete]
     private void Update()
@@ -38,12 +42,17 @@ public class GameManager : MonoBehaviour
             if (transform.Find("TimerStart") != null)
             {
                 if (FindObjectOfType<ThirdPersonCharacter>().transform.position.x >=
-                    transform.Find("TimerStart").transform.position.x)
+                    transform.Find("TimerStart").transform.position.x && !passedZone)
                 {
                     FindObjectOfType<GameManager>().AddMessage("Good luck!", 5f);
                     tutorialBtn.gameObject.SetActive(false);
                     // After the player passes the tutorial, start the timer
                     timerActive = true;
+                    passedZone = true;
+                }
+                else if (transform.Find("TimerStart").gameObject == null)
+                {
+                    print("ERROR: Timer start child not found!");
                 }
             }
         }
@@ -53,7 +62,7 @@ public class GameManager : MonoBehaviour
 
         float seconds = time % 60f;
 
-        int minutes = (int)Mathf.Floor((int)time / 60); // Round down
+        int minutes = (int)Mathf.Floor((int)time / 60); // Always round down
 
         timerText.text = "Time: " + minutes.ToString() + ":" + (seconds < 10f ? "0" : "") + seconds.ToString("F2");
 
@@ -80,5 +89,9 @@ public class GameManager : MonoBehaviour
     private void _ResetUserMessage()
     {
         userMsg.text = "";
+    }
+    public void SetZoneText(string zoneName)
+    {
+        zoneText.text = "Current Zone: " + zoneName;
     }
 }
